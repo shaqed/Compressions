@@ -4,9 +4,26 @@ import java.util.*;
 public class Mainer {
     public static void main(String[] args) {
 
-        go();
+        testing();
 
     }
+
+
+
+    public static void testing() {
+
+        char[] ABC = {' ', ' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+        int[] encoded = {24,25,26,29,27,26,31,33};
+
+        LZW.decode(encoded, ABC);
+
+
+
+    }
+
+
+
+
 
 
 

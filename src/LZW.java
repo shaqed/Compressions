@@ -54,8 +54,13 @@ public class LZW {
 
             stringBuilder.append(decodedSubstring);
 
-            char nextChar = i < encoded.length-1 ? dict.get(encoded[i+1]).charAt(0) : '?';
-            dict.put(counter++, decodedSubstring.concat(nextChar + ""));
+            try {
+                char nextChar = i < encoded.length-1 ? dict.get(encoded[i+1]).charAt(0) : '?';
+                dict.put(counter++, decodedSubstring.concat(nextChar + ""));
+            } catch (Exception e) {
+                dict.put(counter++, decodedSubstring.concat(decodedSubstring.charAt(0) + ""));
+
+            }
 
         }
 
