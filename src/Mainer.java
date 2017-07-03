@@ -17,6 +17,8 @@ public class Mainer {
         String str3 = "COOKEDCOCOA";
 
 
+
+
         int[][] encodedMatrix = {
                 {34, 0, 1, 0, 0, 0},
                 {0, -1, 0 ,1, 0, 0},
@@ -30,9 +32,15 @@ public class Mainer {
         calculateProbabilitiesFractions(str2);
         calculateProbabilitiesFractions(str3);
 
-        HashMap<Character, Double> str1Map = calculateProbabilities(str1);
-        HashMap<Character, Double> str2Map = calculateProbabilities(str2);
-        HashMap<Character, Double> str3Map = calculateProbabilities(str3);
+        LinkedHashMap<Character, Double> str1Map = calculateProbabilities(str1);
+        LinkedHashMap<Character, Double> str2Map = calculateProbabilities(str2);
+        LinkedHashMap<Character, Double> str3Map = calculateProbabilities(str3);
+
+
+        System.out.println("Entropy for: " + str1 + " " + calculateEntropy(str1Map));
+        System.out.println("Entropy for: " + str2 + " " + calculateEntropy(str2Map));
+        System.out.println("Entropy for: " + str3 + " " + calculateEntropy(str3Map));
+        System.out.println();
 
         ArithmeticEncoding.arithmeticEncode(str1Map, str1, str1.length());
         ArithmeticEncoding.arithmeticEncode(str2Map, str2, str2.length());
@@ -73,6 +81,15 @@ public class Mainer {
 
         LZ77.encode(str1, 6, 6);
 
+        System.out.println("----- Huffman -----");
+        String str4 = "GOGO,BOOMBOOM,OMAN,BANDANA,ALA";
+
+        LinkedHashMap<Character, Double> str4Map = calculateProbabilities(str4);
+
+        System.out.println("Entropy for : " + str4 + ": " + calculateEntropy(str4Map));
+        Huffman.encode(str4, str4Map);
+
+
     }
 
 
@@ -91,6 +108,13 @@ public class Mainer {
 
 
 
+    public static double calculateEntropy(LinkedHashMap<Character, Double> probabilities) {
+        double entropy = 0.0;
+        for (double i : probabilities.values()) {
+            entropy -= i * (Math.log(i)/Math.log(2));
+        }
+        return entropy;
+    }
 
     public static LinkedHashMap<Character, Double> calculateProbabilities(String string) throws ArrayIndexOutOfBoundsException{
         System.out.println("Printing probabilities of " + string);
